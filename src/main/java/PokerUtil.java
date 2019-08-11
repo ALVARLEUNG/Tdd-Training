@@ -46,6 +46,9 @@ public class PokerUtil {
                 case 4:
                     playerDo.setLevel(4);
                     break;
+                case 8:
+                    playerDo.setLevel(8);
+                    break;
             }
         }
         return playerDo;
@@ -84,6 +87,8 @@ public class PokerUtil {
                 number++;
             } else if (Integer.valueOf(entry.getValue().toString()) == 3) {
                 return 4;
+            } else if (Integer.valueOf(entry.getValue().toString()) == 4) {
+                return 8;
             }
         }
         return number;
