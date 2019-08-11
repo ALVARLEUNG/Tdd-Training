@@ -60,6 +60,8 @@ public class PokerUtil {
                 return selectMaxPokerByLevel2(playerDo);
             case 3:
                 return selectMaxPokerByLevel3(playerDo);
+            case 4:
+                return selectMaxPokerByLevel2(playerDo);
             default:
                 return selectMaxPokerByLevel1(playerDo.getPlayer());
         }
