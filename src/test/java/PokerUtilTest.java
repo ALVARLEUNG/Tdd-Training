@@ -132,7 +132,25 @@ public class PokerUtilTest {
         Assert.assertEquals(Constant.PLAYER2_WIN, result);
     }
 
+//given: [2h 3c 5s 9c 6d] VS [3h 3d 6c 7c 2d] -> then: [3h 3d 6c 7c 2d] win
+//given: [3h 3d 6c 7c 2d] VS [5h 5d 6c 7c ad] -> then: [5h 5d 6c 7c ad] win
+@Test
+public void should_return_player2_win_when_player1_vs_player2_given_2h_3c_5s_9c_6d_vs_3h_3d_6c_7c_2d() {
+    String[] number1 = {"2", "3", "5", "9", "6"};
+    String[] type1 = {"h", "c", "s", "c", "d"};
+    List<Poker> pokers1 = pokersBuilder(number1, type1);
+    Player player1 = new Player(pokers1);
 
+    String[] number2 = {"3", "3", "6", "7", "2"};
+    String[] type2 = {"h", "d", "c", "c", "d"};
+    List<Poker> pokers2 = pokersBuilder(number2, type2);
+    Player player2 = new Player(pokers2);
+
+    PokerUtil pokerUtil = new PokerUtil();
+    String result = pokerUtil.playPokerGame(player1, player2);
+
+    Assert.assertEquals(Constant.PLAYER2_WIN, result);
+}
 
     private List<Poker> pokersBuilder(String[] number, String[] type) {
         List<Poker> pokers = new ArrayList<>();
