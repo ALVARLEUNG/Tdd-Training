@@ -27,8 +27,9 @@ public class Poker {
         this.type = type;
     }
 
-    public boolean comparePoker(Poker poker) {
-        if(Integer.parseInt(this.number) > Integer.parseInt(poker.getNumber())) return true;
-        return false;
+    public String comparePoker(Poker poker) {
+        if(Integer.parseInt(this.number) > Integer.parseInt(poker.getNumber())) return Constant.PLAYER1_WIN;
+        else if(this.number.equals(poker.getNumber())) return Constant.A_DRAW;
+        return Constant.PLAYER2_WIN;
     }
 }
