@@ -1,7 +1,9 @@
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import static org.junit.Assert.*;
 
@@ -90,6 +92,33 @@ public class PokerUtilTest {
         String result = pokerUtil.playPokerGame(player1, player2);
 
         Assert.assertEquals(Constant.PLAYER2_WIN, result);
+    }
+    
+    //give five poker at the first level
+    @Test
+    public void should_return_player1_win_when_player1_vs_player2_given_2h_3c_5s_9c_6d_vs_3h_5d_6c_7c_2d() {
+        String[] number1 = {"2", "3", "5", "9", "6"};
+        String[] type1 = {"h", "c", "s", "c", "d"};
+        List<Poker> pokers1 = pokersBuilder(number1, type1);
+        Player player1 = new Player(pokers1);
+
+        String[] number2 = {"3", "5", "6", "7", "2"};
+        String[] type2 = {"h", "d", "c", "c", "d"};
+        List<Poker> pokers2 = pokersBuilder(number2, type2);
+        Player player2 = new Player(pokers2);
+
+        PokerUtil pokerUtil = new PokerUtil();
+        String result = pokerUtil.playPokerGame(player1, player2);
+
+        Assert.assertEquals(Constant.PLAYER1_WIN, result);
+    }
+
+    private List<Poker> pokersBuilder(String[] number, String[] type) {
+        List<Poker> pokers = new ArrayList<>();
+        for (int i = 0; i < 5; i++) {
+            pokers.add(new Poker(number[i], type[i]));
+        }
+        return pokers;
     }
 
     private Player playerBuilder(Poker... poker) {
