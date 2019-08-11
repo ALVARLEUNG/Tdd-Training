@@ -242,8 +242,6 @@ public class PokerUtilTest {
     }
 
     //give five player at the fifth level
-//    given: [3h 3d 3c 7c 2d] VS [3h 4d 5c 6c 7d] -> then: [3h 4d 5c 6c 7d] win
-//    given: [3d 4d 5c 6c 7d] VS [4h 5d 6c 7c 8d] -> then: [4h 5d 6c 7c 8d] win
     @Test
     public void should_return_player2_win_when_player1_vs_player2_given_3h_3d_3c_7c_2d_vs_3h_4d_5c_6c_7d() {
         String[] number1 = {"3", "3", "3", "7", "2"};
@@ -280,6 +278,29 @@ public class PokerUtilTest {
         Assert.assertEquals(Constant.PLAYER2_WIN, result);
     }
 
+    //give five player at the Level six
+    @Test
+    public void should_return_player2_win_when_player1_vs_player2_given_3h_4d_5c_6c_7d_vs_2d_5d_6d_4d_8d() {
+        String[] number1 = {"3", "4", "5", "6", "7"};
+        String[] type1 = {"h", "d", "c", "c", "d"};
+        List<Poker> pokers1 = pokersBuilder(number1, type1);
+        Player player1 = new Player(pokers1);
+
+        String[] number2 = {"2", "5", "6", "4", "8"};
+        String[] type2 = {"d", "d", "d", "d", "d"};
+        List<Poker> pokers2 = pokersBuilder(number2, type2);
+        Player player2 = new Player(pokers2);
+
+        PokerUtil pokerUtil = new PokerUtil();
+        String result = pokerUtil.playPokerGame(player1, player2);
+
+        Assert.assertEquals(Constant.PLAYER2_WIN, result);
+    }
+//    given: [2d 5d 6d 4d 8d] VS [2c 5c 6c 4c 8c] -> then: [2c 5c 6c 4c 8c] win
+//    given: [2c 5c 6c 4c 8c] VS [2h 5h 6h 4h 8h] -> then: [2h 5h 6h 4h 8h] win
+//    given: [2h 5h 6h 4h 8h] VS [2s 5s 6s 4s 8s] -> then: [2s 5s 6s 4s 8s] win
+//    given: [3d 4d 5c 6c 7d] VS [2c 5c 6c 4c 8c] -> then: [2c 5c 6c 4c 8c] win
+
     private List<Poker> pokersBuilder(String[] number, String[] type) {
         List<Poker> pokers = new ArrayList<>();
         for (int i = 0; i < 5; i++) {
@@ -287,6 +308,7 @@ public class PokerUtilTest {
         }
         return pokers;
     }
+
     private Player playerBuilder(Poker... poker) {
         Player player = new Player();
         player.setPokers(Arrays.asList(poker));

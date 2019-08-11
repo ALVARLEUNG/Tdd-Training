@@ -17,16 +17,20 @@ public class PokerUtil {
         PlayerDo playerDo = new PlayerDo();
         playerDo.setPlayer(player);
         playerDo.setPlayerPokerStatistics(playerPokerStatistics);
-        judgeLevel(player, playerPokerStatistics, playerDo);
-        return playerDo;
+        return judgeLevel(player, playerPokerStatistics, playerDo);
     }
 
-    private void judgeLevel(Player player, Map<String, Integer> playerPokerStatistics, PlayerDo playerDo) {
+    private PlayerDo judgeLevel(Player player, Map<String, Integer> playerPokerStatistics, PlayerDo playerDo) {
+        if (isLevel6(player.getPokers())) {
+            playerDo.setLevel(6);
+            return playerDo;
+        }
         if (isArrayInSorted(player.getPokers()
                                     .stream()
                                     .map(item -> Integer.parseInt(item.getNumber()))
                                     .collect(Collectors.toList()), player.getPokers().size()) == 1) {
             playerDo.setLevel(5);
+            return playerDo;
         } else {
             switch (judgeBeforeFourLevels(playerPokerStatistics)) {
                 case 2:
@@ -40,7 +44,19 @@ public class PokerUtil {
                     break;
             }
         }
+        return playerDo;
 
+    }
+
+    private boolean isLevel6(List<Poker> pokers) {
+        int count = 0;
+        String target = pokers.get(0).getType();
+        for (Poker poker : pokers) {
+            if (poker.getType().equals(target)) {
+                count++;
+            }
+        }
+        return count == pokers.size() ? true : false;
     }
 
     private int judgeBeforeFourLevels(Map<String, Integer> playerPokerStatistics) {
