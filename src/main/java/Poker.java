@@ -6,6 +6,10 @@ public class Poker {
     public Poker() {
     }
 
+    public Poker(String number) {
+        this.number = number;
+    }
+
     public Poker(String number, String type) {
         this.number = transformNumber(number);
         this.type = type;

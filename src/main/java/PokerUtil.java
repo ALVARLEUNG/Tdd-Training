@@ -20,14 +20,28 @@ public class PokerUtil {
         PlayerDo playerDo = new PlayerDo();
         playerDo.setPlayer(player);
         playerDo.setPlayerPokerStatistics(playerPokerStatistics);
-        if (playerPokerStatistics.size() < player.getPokers().size()) {
+
+        if (isLevel2OrLevel3(playerPokerStatistics)==3) {
+            playerDo.setLevel(3);
+        }
+        if (isLevel2OrLevel3(playerPokerStatistics)==2) {
             playerDo.setLevel(2);
         }
         return playerDo;
     }
 
+    private int isLevel2OrLevel3(Map<String, Integer> playerPokerStatistics) {
+        int number = 1;
+        for (Map.Entry entry : playerPokerStatistics.entrySet()) {
+            if (Integer.valueOf(entry.getValue().toString()) == 2) {
+                number++;
+            }
+        }
+        return number;
+    }
+
     private String comparePokers(PlayerDo playerDo1, PlayerDo playerDo2) {
-        Poker maxPoker1= findMaxPoker(playerDo1);;
+        Poker maxPoker1 = findMaxPoker(playerDo1);
         Poker maxPoker2 = findMaxPoker(playerDo2);
         return maxPoker1.comparePoker(maxPoker2);
     }
@@ -36,6 +50,8 @@ public class PokerUtil {
         switch (playerDo.getLevel()) {
             case 2:
                 return selectMaxPokerByLevel2(playerDo);
+            case 3:
+                return selectMaxPokerByLevel3(playerDo);
             default:
                 return selectMaxPokerByLevel1(playerDo.getPlayer());
         }
@@ -62,13 +78,25 @@ public class PokerUtil {
 
     private Poker selectMaxPokerByLevel2(PlayerDo playerDo) {
         String max = "0";
-        Object key = null;
+        Object key = new Object();
         for (Map.Entry entry : playerDo.getPlayerPokerStatistics().entrySet()) {
             if (Integer.valueOf(entry.getValue().toString()) > Integer.valueOf(max)) {
                 max = entry.getValue().toString();
                 key = entry.getKey();
             }
         }
-        return new Poker(key.toString(), max);
+        return new Poker(key.toString());
+    }
+
+    private Poker selectMaxPokerByLevel3(PlayerDo playerDo) {
+        Object key = new Object();
+        for (Map.Entry entry : playerDo.getPlayerPokerStatistics().entrySet()) {
+            if (Integer.valueOf(entry.getValue()
+                                        .toString()) == 2 && Integer.valueOf(key.toString()) < Integer.valueOf(entry.getKey()
+                                                                                                                       .toString())) {
+                key = entry.getKey();
+            }
+        }
+        return new Poker(key.toString());
     }
 }
