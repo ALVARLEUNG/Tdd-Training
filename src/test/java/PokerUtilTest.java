@@ -389,6 +389,25 @@ public class PokerUtilTest {
         Assert.assertEquals(Constant.PLAYER2_WIN, result);
     }
 
+    //give five player at the level nine
+    @Test
+    public void should_return_player2_win_when_player1_vs_player2_given_9d_9c_9h_9c_2d_vs_3h_4h_5h_6h_7h() {
+        String[] number1 = {"9", "9", "9", "9", "2"};
+        String[] type1 = {"d", "c", "h", "c", "d"};
+        List<Poker> pokers1 = pokersBuilder(number1, type1);
+        Player player1 = new Player(pokers1);
+
+        String[] number2 = {"3", "4", "5", "6", "7"};
+        String[] type2 = {"h", "h", "h", "h", "h"};
+        List<Poker> pokers2 = pokersBuilder(number2, type2);
+        Player player2 = new Player(pokers2);
+
+        PokerUtil pokerUtil = new PokerUtil();
+        String result = pokerUtil.playPokerGame(player1, player2);
+
+        Assert.assertEquals(Constant.PLAYER2_WIN, result);
+    }
+
     private List<Poker> pokersBuilder(String[] number, String[] type) {
         List<Poker> pokers = new ArrayList<>();
         for (int i = 0; i < 5; i++) {

@@ -42,7 +42,7 @@ given: [kd kc kh 3c 3d] VS [3d 3c 3h 3c 2d] -> then: [3d 3c 3h 3c 2d] win
 given: [3d 3c 3h 3c 2d] VS [4d 4c 4h 4c 2d] -> then: [4d 4c 4h 4c 2d] win
 
 //give five player at the level nine
-given: [9d 9c 9h 9c 2d] VS [4d 4c 4h 4c 2d] -> then: [4d 4c 4h 4c 2d] win
+given: [9d 9c 9h 9c 2d] VS [3h 4h 5h 6h 7h] -> then: [3h 4h 5h 6h 7h] win
 
 
 ```

@@ -21,6 +21,13 @@ public class PokerUtil {
     }
 
     private PlayerDo judgeLevel(Player player, Map<String, Integer> playerPokerStatistics, PlayerDo playerDo) {
+        if (isArrayInSorted(player.getPokers()
+                                    .stream()
+                                    .map(item -> Integer.parseInt(item.getNumber()))
+                                    .collect(Collectors.toList()), player.getPokers().size()) == 1 && isLevel6(player.getPokers())) {
+            playerDo.setLevel(9);
+            return playerDo;
+        }
         if (isLevel7(playerPokerStatistics)) {
             playerDo.setLevel(7);
             return playerDo;
