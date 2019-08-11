@@ -19,20 +19,30 @@ public class PokerUtil {
         playerDo.setPlayer(player);
         playerDo.setPlayerPokerStatistics(playerPokerStatistics);
 
-        if (isLevel2OrLevel3(playerPokerStatistics) == 3) {
-            playerDo.setLevel(3);
-        }
-        if (isLevel2OrLevel3(playerPokerStatistics) == 2) {
-            playerDo.setLevel(2);
+        int level = judgeBeforeFourLevels(playerPokerStatistics);
+
+        switch (level) {
+            case 2:
+                playerDo.setLevel(2);
+                break;
+            case 3:
+                playerDo.setLevel(3);
+                break;
+            case 4:
+                playerDo.setLevel(4);
+                break;
         }
         return playerDo;
     }
 
-    private int isLevel2OrLevel3(Map<String, Integer> playerPokerStatistics) {
+
+    private int judgeBeforeFourLevels(Map<String, Integer> playerPokerStatistics) {
         int number = 1;
         for (Map.Entry entry : playerPokerStatistics.entrySet()) {
             if (Integer.valueOf(entry.getValue().toString()) == 2) {
                 number++;
+            } else if (Integer.valueOf(entry.getValue().toString()) == 3) {
+                return 4;
             }
         }
         return number;
@@ -93,6 +103,9 @@ public class PokerUtil {
                 keys.add(entry.getKey());
             }
         }
-        return new Poker(String.valueOf(keys.stream().mapToInt(item -> Integer.valueOf(String.valueOf(item))).max().getAsInt()));
+        return new Poker(String.valueOf(keys.stream()
+                                                .mapToInt(item -> Integer.valueOf(String.valueOf(item)))
+                                                .max()
+                                                .getAsInt()));
     }
 }
