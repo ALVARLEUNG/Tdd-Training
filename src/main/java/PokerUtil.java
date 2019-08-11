@@ -21,7 +21,7 @@ public class PokerUtil {
     }
 
     private PlayerDo judgeLevel(Player player, Map<String, Integer> playerPokerStatistics, PlayerDo playerDo) {
-        if (isLevel6(player.getPokers())) {
+        if (player.getPokers().size() > 1 && isLevel6(player.getPokers())) {
             playerDo.setLevel(6);
             return playerDo;
         }
@@ -72,6 +72,9 @@ public class PokerUtil {
     }
 
     private String comparePokers(PlayerDo playerDo1, PlayerDo playerDo2) {
+        if (playerDo1.getLevel() == 6 && playerDo2.getLevel() == 6) {
+            return Constant.A_DRAW;
+        }
         Poker maxPoker1 = findMaxPoker(playerDo1);
         Poker maxPoker2 = findMaxPoker(playerDo2);
         return maxPoker1.comparePoker(maxPoker2);

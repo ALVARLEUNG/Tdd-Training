@@ -31,10 +31,7 @@ given: [3d 4d 5c 6c 7d] VS [4h 5d 6c 7c 8d] -> then: [4h 5d 6c 7c 8d] win
 
 //give five player at the Level six
 given: [3d 4d 5c 6c 7d] VS [2d 5d 6d 4d 8d] -> then: [2d 5d 6d 4d 8d] win
-given: [2d 5d 6d 4d 8d] VS [2c 5c 6c 4c 8c] -> then: [2c 5c 6c 4c 8c] win
-given: [2c 5c 6c 4c 8c] VS [2h 5h 6h 4h 8h] -> then: [2h 5h 6h 4h 8h] win
-given: [2h 5h 6h 4h 8h] VS [2s 5s 6s 4s 8s] -> then: [2s 5s 6s 4s 8s] win
-given: [3d 4d 5c 6c 7d] VS [2c 5c 6c 4c 8c] -> then: [2c 5c 6c 4c 8c] win
+given: [3c 8c 5c 6c 9c] VS [2d 5d 6d 4d 8d] -> then: a draw
 
 //give five player at the level sevent
 given: [3d 4d 5c 6c 7d] VS [2d 2c 2h 3c 3d] -> then: [2d 2c 2h 3c 3d] win
