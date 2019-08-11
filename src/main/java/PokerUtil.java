@@ -1,10 +1,8 @@
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class PokerUtil {
 
     public String playPokerGame(Player player1, Player player2) {
-
         PlayerDo playerDo1 = generatePlayerDo(player1);
         PlayerDo playerDo2 = generatePlayerDo(player2);
 
@@ -21,10 +19,10 @@ public class PokerUtil {
         playerDo.setPlayer(player);
         playerDo.setPlayerPokerStatistics(playerPokerStatistics);
 
-        if (isLevel2OrLevel3(playerPokerStatistics)==3) {
+        if (isLevel2OrLevel3(playerPokerStatistics) == 3) {
             playerDo.setLevel(3);
         }
-        if (isLevel2OrLevel3(playerPokerStatistics)==2) {
+        if (isLevel2OrLevel3(playerPokerStatistics) == 2) {
             playerDo.setLevel(2);
         }
         return playerDo;
@@ -89,14 +87,12 @@ public class PokerUtil {
     }
 
     private Poker selectMaxPokerByLevel3(PlayerDo playerDo) {
-        Object key = new Object();
+        List<Object> keys = new ArrayList<>();
         for (Map.Entry entry : playerDo.getPlayerPokerStatistics().entrySet()) {
-            if (Integer.valueOf(entry.getValue()
-                                        .toString()) == 2 && Integer.valueOf(key.toString()) < Integer.valueOf(entry.getKey()
-                                                                                                                       .toString())) {
-                key = entry.getKey();
+            if (Integer.valueOf(entry.getValue().toString()) == 2) {
+                keys.add(entry.getKey());
             }
         }
-        return new Poker(key.toString());
+        return new Poker(String.valueOf(keys.stream().mapToInt(item -> Integer.valueOf(String.valueOf(item))).max().getAsInt()));
     }
 }
