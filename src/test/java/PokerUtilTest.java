@@ -132,8 +132,6 @@ public class PokerUtilTest {
         Assert.assertEquals(Constant.PLAYER2_WIN, result);
     }
 
-    //given: [2h 3c 5s 9c 6d] VS [3h 3d 6c 7c 2d] -> then: [3h 3d 6c 7c 2d] win
-//given: [3h 3d 6c 7c 2d] VS [5h 5d 6c 7c ad] -> then: [5h 5d 6c 7c ad] win
     @Test
     public void should_return_player2_win_when_player1_vs_player2_given_2h_3c_5s_9c_6d_vs_3h_3d_6c_7c_2d() {
         String[] number1 = {"2", "3", "5", "9", "6"};
