@@ -1,4 +1,5 @@
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class PokerUtil {
 
@@ -8,9 +9,7 @@ public class PokerUtil {
 
         if (playerDo1.getLevel() > playerDo2.getLevel()) return Constant.PLAYER1_WIN;
         else if (playerDo2.getLevel() > playerDo1.getLevel()) return Constant.PLAYER2_WIN;
-        else {
-            return comparePokers(playerDo1, playerDo2);
-        }
+        else return comparePokers(playerDo1, playerDo2);
     }
 
     private PlayerDo generatePlayerDo(Player player) {
@@ -18,23 +17,31 @@ public class PokerUtil {
         PlayerDo playerDo = new PlayerDo();
         playerDo.setPlayer(player);
         playerDo.setPlayerPokerStatistics(playerPokerStatistics);
-
-        int level = judgeBeforeFourLevels(playerPokerStatistics);
-
-        switch (level) {
-            case 2:
-                playerDo.setLevel(2);
-                break;
-            case 3:
-                playerDo.setLevel(3);
-                break;
-            case 4:
-                playerDo.setLevel(4);
-                break;
-        }
+        judgeLevel(player, playerPokerStatistics, playerDo);
         return playerDo;
     }
 
+    private void judgeLevel(Player player, Map<String, Integer> playerPokerStatistics, PlayerDo playerDo) {
+        if (isArrayInSorted(player.getPokers()
+                                    .stream()
+                                    .map(item -> Integer.parseInt(item.getNumber()))
+                                    .collect(Collectors.toList()), player.getPokers().size()) == 1) {
+            playerDo.setLevel(5);
+        } else {
+            switch (judgeBeforeFourLevels(playerPokerStatistics)) {
+                case 2:
+                    playerDo.setLevel(2);
+                    break;
+                case 3:
+                    playerDo.setLevel(3);
+                    break;
+                case 4:
+                    playerDo.setLevel(4);
+                    break;
+            }
+        }
+
+    }
 
     private int judgeBeforeFourLevels(Map<String, Integer> playerPokerStatistics) {
         int number = 1;
@@ -109,5 +116,10 @@ public class PokerUtil {
                                                 .mapToInt(item -> Integer.valueOf(String.valueOf(item)))
                                                 .max()
                                                 .getAsInt()));
+    }
+
+    private static int isArrayInSorted(List<Integer> arr, int index) {
+        if (index == 1) return 1;
+        return (arr.get(index - 1) <= arr.get(index - 2) ? 0 : isArrayInSorted(arr, index - 1));
     }
 }

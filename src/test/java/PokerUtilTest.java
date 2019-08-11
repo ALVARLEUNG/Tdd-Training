@@ -240,6 +240,46 @@ public class PokerUtilTest {
 
         Assert.assertEquals(Constant.PLAYER2_WIN, result);
     }
+
+    //give five player at the fifth level
+//    given: [3h 3d 3c 7c 2d] VS [3h 4d 5c 6c 7d] -> then: [3h 4d 5c 6c 7d] win
+//    given: [3d 4d 5c 6c 7d] VS [4h 5d 6c 7c 8d] -> then: [4h 5d 6c 7c 8d] win
+    @Test
+    public void should_return_player2_win_when_player1_vs_player2_given_3h_3d_3c_7c_2d_vs_3h_4d_5c_6c_7d() {
+        String[] number1 = {"3", "3", "3", "7", "2"};
+        String[] type1 = {"h", "d", "c", "c", "d"};
+        List<Poker> pokers1 = pokersBuilder(number1, type1);
+        Player player1 = new Player(pokers1);
+
+        String[] number2 = {"3", "4", "5", "6", "7"};
+        String[] type2 = {"h", "d", "c", "c", "d"};
+        List<Poker> pokers2 = pokersBuilder(number2, type2);
+        Player player2 = new Player(pokers2);
+
+        PokerUtil pokerUtil = new PokerUtil();
+        String result = pokerUtil.playPokerGame(player1, player2);
+
+        Assert.assertEquals(Constant.PLAYER2_WIN, result);
+    }
+
+    @Test
+    public void should_return_player2_win_when_player1_vs_player2_given_3h_4d_5c_6c_7d_vs_4h_5d_6c_7c_8d() {
+        String[] number1 = {"3", "4", "5", "6", "7"};
+        String[] type1 = {"h", "d", "c", "c", "d"};
+        List<Poker> pokers1 = pokersBuilder(number1, type1);
+        Player player1 = new Player(pokers1);
+
+        String[] number2 = {"4", "5", "6", "7", "8"};
+        String[] type2 = {"h", "d", "c", "c", "d"};
+        List<Poker> pokers2 = pokersBuilder(number2, type2);
+        Player player2 = new Player(pokers2);
+
+        PokerUtil pokerUtil = new PokerUtil();
+        String result = pokerUtil.playPokerGame(player1, player2);
+
+        Assert.assertEquals(Constant.PLAYER2_WIN, result);
+    }
+
     private List<Poker> pokersBuilder(String[] number, String[] type) {
         List<Poker> pokers = new ArrayList<>();
         for (int i = 0; i < 5; i++) {
@@ -247,7 +287,6 @@ public class PokerUtilTest {
         }
         return pokers;
     }
-
     private Player playerBuilder(Poker... poker) {
         Player player = new Player();
         player.setPokers(Arrays.asList(poker));

@@ -27,7 +27,7 @@ given: [3h 3d 3c 7c 2d] VS [5h 5d 5c 7c 2d] -> then: [5h 5d 5c 7c 2d] win
 
 //give five player at the fifth level
 given: [3h 3d 3c 7c 2d] VS [3h 4d 5c 6c 7d] -> then: [3h 4d 5c 6c 7d] win
-given: [3d 4d 5c 6c 7d] VS [4h 5d 6c 7c 8d] -> then: [3h 4d 5c 6c 7d] win
+given: [3d 4d 5c 6c 7d] VS [4h 5d 6c 7c 8d] -> then: [4h 5d 6c 7c 8d] win
 
 //give five player at the Level six
 given: [3d 4d 5c 6c 7d] VS [2d 5d 6d 4d 8d] -> then: [2d 5d 6d 4d 8d] win
