@@ -63,6 +63,20 @@ public class PokerUtilTest {
         Assert.assertEquals(Constant.PLAYER2_WIN, result);
     }
 
+    @Test
+    public void should_return_player2_win_when_player1_vs_player2_given_qc_vs_kd() {
+        Poker poker1 = new Poker("q", "c");
+        Player player1 = playerBuilder(poker1);
+
+        Poker poker2 = new Poker("k", "d");
+        Player player2 = playerBuilder(poker2);
+
+        PokerUtil pokerUtil = new PokerUtil();
+        String result = pokerUtil.playPokerGame(player1, player2);
+
+        Assert.assertEquals(Constant.PLAYER2_WIN, result);
+    }
+
     private Player playerBuilder(Poker... poker) {
         Player player = new Player();
         player.setPokers(Arrays.asList(poker));
