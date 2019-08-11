@@ -7,6 +7,7 @@ import static org.junit.Assert.*;
 
 public class PokerUtilTest {
 
+    // give two poker at base rule
     @Test
     public void should_return_player1_win_when_player1_vs_player2_given_3c_vs_2d() {
         Poker poker1 = new Poker("3", "c");
@@ -69,6 +70,20 @@ public class PokerUtilTest {
         Player player1 = playerBuilder(poker1);
 
         Poker poker2 = new Poker("k", "d");
+        Player player2 = playerBuilder(poker2);
+
+        PokerUtil pokerUtil = new PokerUtil();
+        String result = pokerUtil.playPokerGame(player1, player2);
+
+        Assert.assertEquals(Constant.PLAYER2_WIN, result);
+    }
+
+    @Test
+    public void should_return_player2_win_when_player1_vs_player2_given_kc_vs_ad() {
+        Poker poker1 = new Poker("k", "c");
+        Player player1 = playerBuilder(poker1);
+
+        Poker poker2 = new Poker("a", "d");
         Player player2 = playerBuilder(poker2);
 
         PokerUtil pokerUtil = new PokerUtil();

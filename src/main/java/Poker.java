@@ -41,6 +41,8 @@ public class Poker {
                 return "12";
             case "k":
                 return "13";
+            case "a":
+                return "14";
             default:
                 return number;
         }
