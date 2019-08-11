@@ -316,8 +316,6 @@ public class PokerUtilTest {
     }
 
     //give five player at the level seven
-//    given: [2d 2c 2h 3c 3d] VS [3d 3c 3h 2c 2d] -> then: [3d 3c 3h 2c 2d] win
-
     @Test
     public void should_return_player2_win_when_player1_vs_player2_given_3c_4c_5c_6c_9c_vs_2d_2c_2d_4d_4d() {
         String[] number1 = {"3", "8", "5", "6", "9"};
@@ -327,6 +325,24 @@ public class PokerUtilTest {
 
         String[] number2 = {"2", "2", "2", "4", "4"};
         String[] type2 = {"d", "c", "d", "d", "d"};
+        List<Poker> pokers2 = pokersBuilder(number2, type2);
+        Player player2 = new Player(pokers2);
+
+        PokerUtil pokerUtil = new PokerUtil();
+        String result = pokerUtil.playPokerGame(player1, player2);
+
+        Assert.assertEquals(Constant.PLAYER2_WIN, result);
+    }
+
+    @Test
+    public void should_return_player2_win_when_player1_vs_player2_given_2d_2c_2h_3c_3d_vs_3d_3c_3h_2c_2d() {
+        String[] number1 = {"2", "2", "2", "3", "3"};
+        String[] type1 = {"d", "c", "h", "c", "d"};
+        List<Poker> pokers1 = pokersBuilder(number1, type1);
+        Player player1 = new Player(pokers1);
+
+        String[] number2 = {"3", "3", "3", "2", "2"};
+        String[] type2 = {"d", "c", "h", "c", "d"};
         List<Poker> pokers2 = pokersBuilder(number2, type2);
         Player player2 = new Player(pokers2);
 
