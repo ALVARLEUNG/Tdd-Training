@@ -21,6 +21,10 @@ public class PokerUtil {
     }
 
     private PlayerDo judgeLevel(Player player, Map<String, Integer> playerPokerStatistics, PlayerDo playerDo) {
+        if (isLevel7(playerPokerStatistics)) {
+            playerDo.setLevel(7);
+            return playerDo;
+        }
         if (player.getPokers().size() > 1 && isLevel6(player.getPokers())) {
             playerDo.setLevel(6);
             return playerDo;
@@ -46,6 +50,20 @@ public class PokerUtil {
         }
         return playerDo;
 
+    }
+
+    private boolean isLevel7(Map<String, Integer> playerPokerStatistics) {
+        boolean has2 = false;
+        boolean has3 = false;
+        for (Map.Entry entry : playerPokerStatistics.entrySet()) {
+            if (Integer.valueOf(entry.getValue().toString()) == 3) {
+                has3 = true;
+            }
+            if (Integer.valueOf(entry.getValue().toString()) == 2) {
+                has2 = true;
+            }
+        }
+        return has2 && has3;
     }
 
     private boolean isLevel6(List<Poker> pokers) {
